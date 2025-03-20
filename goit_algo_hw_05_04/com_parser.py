@@ -5,6 +5,10 @@ def input_error(error_message):
                 return func(*args, **kwargs)
             except ValueError:
                 return error_message
+            except KeyError:
+                return 'Name is not in contact list'
+            except IndexError:
+                return error_message
         return inner
     return decorator
 
@@ -46,19 +50,14 @@ def change_contact(args, contacts):
 @input_error("Enter the contact's name")
 def contact_delete(args, contacts):
     name, = args
-    if name in contacts:
-        contacts.pop(name)
-        return f'{name} has been removed from your contact list.'
-    else:
-        return "Name not found."
+    contacts.pop(name)
+    return f'{name} has been removed from your contact list.'
+    
 
 @input_error("Enter the contact's name")
 def show_phone(args, contacts):
     name, = args
-    if name in contacts:
-        return contacts[name]
-    else:
-        return "Name not found."
+    return contacts[name]
 
 
 def show_all(contacts):
