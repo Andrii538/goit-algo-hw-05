@@ -1,11 +1,14 @@
 from com_parser import *
 from init import init
+import pyjokes
 
 
 def main():
     """
     Консольний бот-помічник, який розпізнає команди, що вводяться з клавіатури, та відповідає згідно із введеною командою.
     Він вміє зберігати, змінювати, видаляти та показувати збережені контакти і відповідні номери телефонів.
+    Після завершення роботи, зберігає всі зміни в список контактів.
+    Показує випадковий жарт за відповідної команди з бібліотеки pyjokes.
     """
     contacts, contacts_file, commands = init()
     while True:
@@ -24,6 +27,8 @@ def main():
             print(show_all(contacts))
         elif command == "change":
             print(change_contact(args, contacts))
+        elif command == "joke":
+            print(pyjokes.get_joke())
         elif command == 'phone':
             print(show_phone(args, contacts))
         elif command == 'delete':
@@ -32,6 +37,7 @@ def main():
             print(commands)
         else:
             print("Invalid command.")
+
 
 if __name__ == "__main__":
     init()
