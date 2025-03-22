@@ -29,7 +29,7 @@ def read_error(func):
 def phone_cleaner(func):
     def normalize_phone(args, contacts):
         phone = args.pop(1)
-        if len(phone) >= 10:
+        if len(phone) in range(10, 14):
             cleaned_num = re.sub(r'[^0-9]', '', phone)
             prepared_num = re.sub(r'^38|^8', '', cleaned_num)
             phone = '+38' + prepared_num
